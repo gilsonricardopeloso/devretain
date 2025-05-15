@@ -61,16 +61,18 @@ npm run dev
 The system comes with two pre-configured users for testing:
 
 1. **Admin User**:
+
    - Email: admin@example.com
-   - Password: password
+   - Password: admin123
 
 2. **Regular User**:
    - Email: user@example.com
-   - Password: password
+   - Password: user123
 
 ## Tech Stack
 
 ### Frontend
+
 - Vite as bundler
 - React.js (version 19) with hooks
 - TypeScript for static typing
@@ -81,6 +83,7 @@ The system comes with two pre-configured users for testing:
 - Zod for schema validation
 
 ### Backend
+
 - NestJS as framework
 - JWT for authentication
 - Bcrypt for password hashing
