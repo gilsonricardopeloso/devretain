@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { z } from 'zod';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { LanguageSelector } from '../components/LanguageSelector';
 
 // Define schema for form validation
 const loginSchema = z.object({
@@ -12,6 +14,7 @@ const loginSchema = z.object({
 type LoginFormData = z.infer<typeof loginSchema>;
 
 const Landing = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [formData, setFormData] = useState<LoginFormData>({
     email: '',
@@ -54,61 +57,61 @@ const Landing = () => {
     try {
       const response = await axios.post('http://localhost:3000/auth/login', formData);
       
-      // Store the token in localStorage
       localStorage.setItem('token', response.data.access_token);
       localStorage.setItem('user', JSON.stringify(response.data.user));
       
-      // Redirect based on user role
       if (response.data.user.role === 'admin') {
         navigate('/dashboard');
       } else {
         navigate('/profile');
       }
     } catch (error) {
-      setErrors({ general: 'Invalid credentials. Please try again.' });
+      setErrors({ general: t('auth.errors.invalidCredentials') });
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-blue-50 to-indigo-100">
-      <header className="container mx-auto p-6">
-        <div className="flex justify-between items-center">
-          <h1 className="text-3xl font-bold text-primary-800">DevRetain</h1>
-        </div>
+    <div className="min-h-screen w-full flex flex-col bg-gradient-to-br from-blue-50 to-indigo-100">
+      <header className="w-full px-4 py-4 md:px-8 md:py-6 flex items-center justify-between">
+        <h1 className="text-2xl md:text-3xl font-bold text-primary-800">DevRetain</h1>
+        <LanguageSelector />
       </header>
       
-      <main className="flex-grow container mx-auto flex items-center justify-center px-4 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-5xl">
+      <main className="flex-grow container mx-auto flex items-center justify-center px-2 py-2">
+         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-5xl">
           <div className="flex flex-col justify-center space-y-6">
-            <h2 className="text-4xl font-bold text-gray-900">Technical Knowledge Retention System</h2>
-            <p className="text-lg text-gray-700">
-              Preserve, document, and transfer critical technical knowledge within your organization.
-              Reduce the impact of losing key technical staff and accelerate onboarding.
+            <h2 className="text-4xl font-bold text-gray-900">
+              {t('landing.title')}
+            </h2>
+             <p className="text-lg text-gray-700">
+              {t('landing.description')}
             </p>
-            <ul className="space-y-2">
+             <ul className="space-y-2">
               <li className="flex items-start">
                 <span className="mr-2 text-primary-600">✓</span>
-                <span>Map knowledge concentration and vulnerabilities</span>
+                <span>{t('landing.features.knowledgeMap')}</span>
               </li>
               <li className="flex items-start">
                 <span className="mr-2 text-primary-600">✓</span>
-                <span>Document decisions and technical context</span>
+                <span>{t('landing.features.documentation')}</span>
               </li>
               <li className="flex items-start">
                 <span className="mr-2 text-primary-600">✓</span>
-                <span>Structure offboarding knowledge transfer</span>
+                <span>{t('landing.features.knowledgeTransfer')}</span>
               </li>
               <li className="flex items-start">
                 <span className="mr-2 text-primary-600">✓</span>
-                <span>Accelerate new hire onboarding</span>
+                <span>{t('landing.features.onboarding')}</span>
               </li>
             </ul>
           </div>
           
-          <div className="bg-white p-8 rounded-xl shadow-lg">
-            <h3 className="text-2xl font-bold mb-6 text-center">Login to Your Account</h3>
+          <div className="flex-1 w-full max-w-md bg-white p-6 md:p-8 rounded-none md:rounded-xl shadow-lg mx-0 md:mx-4 my-0 md:my-8">
+            <h3 className="text-xl md:text-2xl font-bold mb-6 text-center">
+              {t('auth.login.title')}
+            </h3>
             
             <form onSubmit={handleSubmit} className="space-y-4">
               {errors.general && (
@@ -119,7 +122,7 @@ const Landing = () => {
               
               <div>
                 <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                  Email
+                  {t('auth.login.email')}
                 </label>
                 <input
                   id="email"
@@ -137,7 +140,7 @@ const Landing = () => {
               
               <div>
                 <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
-                  Password
+                  {t('auth.login.password')}
                 </label>
                 <input
                   id="password"
@@ -152,7 +155,7 @@ const Landing = () => {
                 )}
               </div>
               
-              <div className="flex items-center justify-between">
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-2">
                 <div className="flex items-center">
                   <input
                     id="remember-me"
@@ -161,12 +164,12 @@ const Landing = () => {
                     className="h-4 w-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500"
                   />
                   <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-700">
-                    Remember me
+                    {t('auth.login.rememberMe')}
                   </label>
                 </div>
                 
                 <a href="#" className="text-sm text-primary-600 hover:text-primary-700">
-                  Forgot password?
+                  {t('auth.login.forgotPassword')}
                 </a>
               </div>
               
@@ -175,13 +178,13 @@ const Landing = () => {
                 disabled={isLoading}
                 className="w-full py-2 px-4 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
               >
-                {isLoading ? 'Signing in...' : 'Sign in'}
+                {isLoading ? t('auth.login.loading') : t('auth.login.submit')}
               </button>
               
               <div className="text-center mt-4">
-                <span className="text-sm text-gray-600">Don't have an account? </span>
+                <span className="text-sm text-gray-600">{t('auth.login.noAccount')} </span>
                 <a href="#" className="text-sm text-primary-600 hover:text-primary-700">
-                  Contact your administrator
+                  {t('auth.login.contactAdmin')}
                 </a>
               </div>
             </form>
@@ -189,8 +192,8 @@ const Landing = () => {
         </div>
       </main>
       
-      <footer className="container mx-auto p-6 text-center text-gray-600 text-sm">
-        &copy; {new Date().getFullYear()} DevRetain. All rights reserved.
+      <footer className="w-full px-2 py-2 md:px-6 md:py-2 text-center text-gray-600 text-sm mt-0">
+        {t('common.footer.copyright', { year: new Date().getFullYear() })}
       </footer>
     </div>
   );

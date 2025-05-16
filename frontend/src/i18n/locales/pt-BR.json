@@ -1,0 +1,126 @@
+{
+  "common": {
+    "loading": "Carregando...",
+    "error": "Erro",
+    "success": "Sucesso",
+    "footer": {
+      "copyright": "© {{year}} DevRetain. Todos os direitos reservados."
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Login na sua conta",
+      "email": "Email",
+      "password": "Senha",
+      "rememberMe": "Lembrar-me",
+      "forgotPassword": "Esqueceu a senha?",
+      "submit": "Entrar",
+      "loading": "Entrando...",
+      "noAccount": "Não tem uma conta?",
+      "contactAdmin": "Contate seu administrador"
+    },
+    "errors": {
+      "invalidCredentials": "Credenciais inválidas. Por favor, tente novamente.",
+      "emailRequired": "Email é obrigatório",
+      "invalidEmail": "Email inválido",
+      "passwordRequired": "Senha é obrigatória",
+      "passwordMinLength": "A senha deve ter pelo menos 6 caracteres"
+    }
+  },
+  "landing": {
+    "title": "Sistema de Retenção de Conhecimento Técnico",
+    "description": "Preserve, documente e transfira conhecimento técnico crítico dentro da sua organização. Reduza o impacto da perda de profissionais técnicos chave e acelere a integração.",
+    "features": {
+      "knowledgeMap": "Mapeie concentração de conhecimento e vulnerabilidades",
+      "documentation": "Documente decisões e contexto técnico",
+      "knowledgeTransfer": "Estruture a transferência de conhecimento",
+      "onboarding": "Acelere a integração de novos colaboradores"
+    }
+  },
+  "dashboard": {
+    "welcome": "Bem-vindo ao Dashboard DevRetain",
+    "description": "Monitore a distribuição de conhecimento e vulnerabilidades críticas",
+    "logout": "Sair",
+    "loggedInAs": "Conectado como",
+    "stats": {
+      "title": "Estatísticas",
+      "totalUsers": "Total de Usuários",
+      "activeProjects": "Projetos Ativos",
+      "technicalDocuments": "Documentos Técnicos",
+      "keyKnowledgeAreas": "Áreas de Conhecimento Chave",
+      "vulnerabilityAlerts": "Alertas de Vulnerabilidade"
+    },
+    "quickActions": {
+      "title": "Ações Rápidas",
+      "addUser": "Adicionar Novo Usuário",
+      "createProject": "Criar Novo Projeto"
+    },
+    "recentActivity": {
+      "title": "Atividades Recentes",
+      "empty": "Nenhuma atividade recente",
+      "documented": "documentou uma",
+      "technicalDecision": "decisão técnica",
+      "completed": "completou",
+      "knowledgeTransfer": "transferência de conhecimento",
+      "updated": "atualizou",
+      "documentation": "documentação",
+      "on": "em",
+      "for": "para",
+      "timeAgo": "2 horas atrás"
+    },
+    "knowledgeHeatMap": {
+      "title": "Mapa de Calor do Conhecimento",
+      "description": "Áreas com concentração de conhecimento e riscos de vulnerabilidade",
+      "knowledgeArea": "Área de Conhecimento",
+      "expertiseLevel": "Nível de Expertise",
+      "primaryOwner": "Responsável Principal",
+      "vulnerability": "Vulnerabilidade"
+    },
+    "recommendedActions": {
+      "title": "Ações Recomendadas",
+      "highRisk": "Alto risco: Agende transferência de conhecimento para Arquitetura de Microserviços",
+      "mediumRisk": "Risco médio: Documente processos de Otimização de Banco de Dados",
+      "integrateKnowledge": "Integre conhecimento de Arquitetura Frontend no onboarding",
+      "scheduleNow": "Agendar Agora",
+      "assignTask": "Atribuir Tarefa",
+      "viewDetails": "Ver Detalhes"
+    }
+  },
+  "profile": {
+    "title": "Meu Perfil",
+    "description": "Gerencie suas áreas de conhecimento e desenvolvimento",
+    "name": "Nome",
+    "email": "Email",
+    "role": "Função",
+    "department": "Departamento",
+    "position": "Cargo",
+    "joined": "Entrou em",
+    "notSpecified": "Não especificado",
+    "editProfile": "Editar Perfil",
+    "skillsAssessment": {
+      "title": "Avaliação de Habilidades",
+      "technicalKnowledge": "Conhecimento Técnico",
+      "documentation": "Documentação",
+      "knowledgeSharing": "Compartilhamento de Conhecimento",
+      "mentoring": "Mentoria"
+    },
+    "knowledgeAreas": {
+      "title": "Minhas Áreas de Conhecimento",
+      "description": "Domínios técnicos pelos quais você é responsável ou contribui",
+      "knowledgeArea": "Área de Conhecimento",
+      "expertiseLevel": "Nível de Expertise",
+      "lastUpdated": "Última Atualização",
+      "actions": "Ações",
+      "update": "Atualizar",
+      "document": "Documentar",
+      "addKnowledgeArea": "Adicionar Área de Conhecimento"
+    },
+    "careerPathway": {
+      "title": "Caminho Profissional",
+      "description": "Seus marcos de desenvolvimento profissional",
+      "completedOn": "Concluído em",
+      "plannedFor": "Planejado para",
+      "startWorking": "Começar a Trabalhar Nisso"
+    }
+  }
+} 

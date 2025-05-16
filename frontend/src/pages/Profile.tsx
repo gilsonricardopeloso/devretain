@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { useLanguage } from '../hooks/useLanguage';
+import { LanguageSelector } from '../components/LanguageSelector';
 
 // Mock data for the user profile
 const knowledgeAreas = [
@@ -18,6 +21,8 @@ const careerMilestones = [
 
 const Profile = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
+  const { initializeLanguage } = useLanguage();
   const [user, setUser] = useState<any>(null);
   
   useEffect(() => {
@@ -34,6 +39,11 @@ const Profile = () => {
     // If user is admin, we could redirect to dashboard here
   }, [navigate]);
   
+  useEffect(() => {
+    // Inicializa o idioma ao carregar o profile
+    initializeLanguage();
+  }, [initializeLanguage]);
+  
   const handleLogout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
@@ -48,15 +58,16 @@ const Profile = () => {
         <div className="container mx-auto p-4 flex justify-between items-center">
           <h1 className="text-2xl font-bold text-primary-800">DevRetain</h1>
           <div className="flex items-center space-x-4">
+            <LanguageSelector />
             <div className="text-sm">
-              <span className="block text-gray-500">Welcome back,</span>
+              <span className="block text-gray-500">{t('dashboard.loggedInAs')}</span>
               <span className="font-semibold">{user.name}</span>
             </div>
             <button 
               onClick={handleLogout}
               className="py-1 px-3 text-sm bg-gray-200 hover:bg-gray-300 text-gray-800 rounded-md"
             >
-              Logout
+              {t('dashboard.logout')}
             </button>
           </div>
         </div>
@@ -64,8 +75,8 @@ const Profile = () => {
       
       <main className="flex-grow container mx-auto p-6">
         <div className="mb-8">
-          <h2 className="text-2xl font-bold mb-2">My Profile</h2>
-          <p className="text-gray-600">Manage your knowledge areas and development path</p>
+          <h2 className="text-2xl font-bold mb-2">{t('profile.title')}</h2>
+          <p className="text-gray-600">{t('profile.description')}</p>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
@@ -81,30 +92,30 @@ const Profile = () => {
                 </div>
               </div>
               <div className="border-t pt-4 mt-4">
-                <p className="text-sm text-gray-500 mb-1">Email</p>
+                <p className="text-sm text-gray-500 mb-1">{t('profile.email')}</p>
                 <p className="font-medium">{user.email}</p>
               </div>
               <div className="border-t pt-4 mt-4">
-                <p className="text-sm text-gray-500 mb-1">Department</p>
+                <p className="text-sm text-gray-500 mb-1">{t('profile.department')}</p>
                 <p className="font-medium">Engineering</p>
               </div>
               <div className="border-t pt-4 mt-4">
-                <p className="text-sm text-gray-500 mb-1">Joined</p>
+                <p className="text-sm text-gray-500 mb-1">{t('profile.joined')}</p>
                 <p className="font-medium">January 15, 2022</p>
               </div>
               <div className="mt-6">
                 <button className="w-full text-sm bg-primary-50 text-primary-600 hover:bg-primary-100 py-2 px-3 rounded-md">
-                  Edit Profile
+                  {t('profile.editProfile')}
                 </button>
               </div>
             </div>
             
             <div className="bg-white rounded-lg shadow p-6">
-              <h3 className="text-lg font-bold mb-4">Skills Assessment</h3>
+              <h3 className="text-lg font-bold mb-4">{t('profile.skillsAssessment.title')}</h3>
               <div className="space-y-4">
                 <div>
                   <div className="flex justify-between items-center mb-1">
-                    <span className="text-sm font-medium">Technical Knowledge</span>
+                    <span className="text-sm font-medium">{t('profile.skillsAssessment.technicalKnowledge')}</span>
                     <span className="text-sm font-medium">85%</span>
                   </div>
                   <div className="w-full bg-gray-200 rounded-full h-2">
@@ -113,7 +124,7 @@ const Profile = () => {
                 </div>
                 <div>
                   <div className="flex justify-between items-center mb-1">
-                    <span className="text-sm font-medium">Documentation</span>
+                    <span className="text-sm font-medium">{t('profile.skillsAssessment.documentation')}</span>
                     <span className="text-sm font-medium">70%</span>
                   </div>
                   <div className="w-full bg-gray-200 rounded-full h-2">
@@ -122,7 +133,7 @@ const Profile = () => {
                 </div>
                 <div>
                   <div className="flex justify-between items-center mb-1">
-                    <span className="text-sm font-medium">Knowledge Sharing</span>
+                    <span className="text-sm font-medium">{t('profile.skillsAssessment.knowledgeSharing')}</span>
                     <span className="text-sm font-medium">65%</span>
                   </div>
                   <div className="w-full bg-gray-200 rounded-full h-2">
@@ -131,7 +142,7 @@ const Profile = () => {
                 </div>
                 <div>
                   <div className="flex justify-between items-center mb-1">
-                    <span className="text-sm font-medium">Mentoring</span>
+                    <span className="text-sm font-medium">{t('profile.skillsAssessment.mentoring')}</span>
                     <span className="text-sm font-medium">60%</span>
                   </div>
                   <div className="w-full bg-gray-200 rounded-full h-2">
@@ -145,24 +156,24 @@ const Profile = () => {
           <div className="md:col-span-2 space-y-6">
             <div className="bg-white rounded-lg shadow">
               <div className="p-6 border-b">
-                <h3 className="text-lg font-bold">My Knowledge Areas</h3>
-                <p className="text-sm text-gray-500">Technical domains you're responsible for or contribute to</p>
+                <h3 className="text-lg font-bold">{t('profile.knowledgeAreas.title')}</h3>
+                <p className="text-sm text-gray-500">{t('profile.knowledgeAreas.description')}</p>
               </div>
               <div className="p-6">
                 <table className="min-w-full divide-y divide-gray-200">
                   <thead>
                     <tr>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Knowledge Area
+                        {t('profile.knowledgeAreas.knowledgeArea')}
                       </th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Expertise Level
+                        {t('profile.knowledgeAreas.expertiseLevel')}
                       </th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Last Updated
+                        {t('profile.knowledgeAreas.lastUpdated')}
                       </th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Actions
+                        {t('profile.knowledgeAreas.actions')}
                       </th>
                     </tr>
                   </thead>
@@ -197,10 +208,10 @@ const Profile = () => {
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                           <a href="#" className="text-primary-600 hover:text-primary-900 mr-4">
-                            Update
+                            {t('profile.knowledgeAreas.update')}
                           </a>
                           <a href="#" className="text-primary-600 hover:text-primary-900">
-                            Document
+                            {t('profile.knowledgeAreas.document')}
                           </a>
                         </td>
                       </tr>
@@ -209,7 +220,7 @@ const Profile = () => {
                 </table>
                 <div className="mt-6 flex justify-center">
                   <button className="text-sm bg-primary-600 text-white hover:bg-primary-700 py-2 px-4 rounded-md">
-                    Add Knowledge Area
+                    {t('profile.knowledgeAreas.addKnowledgeArea')}
                   </button>
                 </div>
               </div>
@@ -217,8 +228,8 @@ const Profile = () => {
             
             <div className="bg-white rounded-lg shadow">
               <div className="p-6 border-b">
-                <h3 className="text-lg font-bold">Career Pathway</h3>
-                <p className="text-sm text-gray-500">Your professional development milestones</p>
+                <h3 className="text-lg font-bold">{t('profile.careerPathway.title')}</h3>
+                <p className="text-sm text-gray-500">{t('profile.careerPathway.description')}</p>
               </div>
               <div className="p-6">
                 <div className="relative">
@@ -250,12 +261,12 @@ const Profile = () => {
                         <h4 className="font-medium text-gray-900">{milestone.title}</h4>
                         <p className="text-sm text-gray-500">
                           {milestone.completed 
-                            ? `Completed on ${milestone.date}` 
-                            : `Planned for ${milestone.plannedDate}`}
+                            ? `${t('profile.careerPathway.completedOn')} ${milestone.date}` 
+                            : `${t('profile.careerPathway.plannedFor')} ${milestone.plannedDate}`}
                         </p>
                         {!milestone.completed && (
                           <button className="mt-2 text-xs bg-primary-50 text-primary-600 hover:bg-primary-100 py-1 px-2 rounded">
-                            Start Working On This
+                            {t('profile.careerPathway.startWorking')}
                           </button>
                         )}
                       </div>
@@ -270,7 +281,7 @@ const Profile = () => {
       
       <footer className="bg-white border-t">
         <div className="container mx-auto px-6 py-4 text-center text-gray-500 text-sm">
-          &copy; {new Date().getFullYear()} DevRetain. All rights reserved.
+          {t('common.footer.copyright', { year: new Date().getFullYear() })}
         </div>
       </footer>
     </div>

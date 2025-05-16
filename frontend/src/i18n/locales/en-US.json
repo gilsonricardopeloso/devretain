@@ -1,0 +1,126 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "footer": {
+      "copyright": "© {{year}} DevRetain. All rights reserved."
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Login to Your Account",
+      "email": "Email",
+      "password": "Password",
+      "rememberMe": "Remember me",
+      "forgotPassword": "Forgot password?",
+      "submit": "Sign in",
+      "loading": "Signing in...",
+      "noAccount": "Don't have an account?",
+      "contactAdmin": "Contact your administrator"
+    },
+    "errors": {
+      "invalidCredentials": "Invalid credentials. Please try again.",
+      "emailRequired": "Email is required",
+      "invalidEmail": "Invalid email address",
+      "passwordRequired": "Password is required",
+      "passwordMinLength": "Password must be at least 6 characters"
+    }
+  },
+  "landing": {
+    "title": "Technical Knowledge Retention System",
+    "description": "Preserve, document, and transfer critical technical knowledge within your organization. Reduce the impact of losing key technical staff and accelerate onboarding.",
+    "features": {
+      "knowledgeMap": "Map knowledge concentration and vulnerabilities",
+      "documentation": "Document decisions and technical context",
+      "knowledgeTransfer": "Structure offboarding knowledge transfer",
+      "onboarding": "Accelerate new hire onboarding"
+    }
+  },
+  "dashboard": {
+    "welcome": "Welcome to DevRetain Dashboard",
+    "description": "Monitor knowledge distribution and critical vulnerabilities",
+    "logout": "Logout",
+    "loggedInAs": "Logged in as",
+    "stats": {
+      "title": "Statistics",
+      "totalUsers": "Total Users",
+      "activeProjects": "Active Projects",
+      "technicalDocuments": "Technical Documents",
+      "keyKnowledgeAreas": "Key Knowledge Areas",
+      "vulnerabilityAlerts": "Vulnerability Alerts"
+    },
+    "quickActions": {
+      "title": "Quick Actions",
+      "addUser": "Add New User",
+      "createProject": "Create New Project"
+    },
+    "recentActivity": {
+      "title": "Recent Activity",
+      "empty": "No recent activities",
+      "documented": "documented a",
+      "technicalDecision": "technical decision",
+      "completed": "completed",
+      "knowledgeTransfer": "knowledge transfer",
+      "updated": "updated",
+      "documentation": "documentation",
+      "on": "on",
+      "for": "for",
+      "timeAgo": "2 hours ago"
+    },
+    "knowledgeHeatMap": {
+      "title": "Knowledge Heat Map",
+      "description": "Areas with concentrated knowledge and vulnerability risks",
+      "knowledgeArea": "Knowledge Area",
+      "expertiseLevel": "Expertise Level",
+      "primaryOwner": "Primary Owner",
+      "vulnerability": "Vulnerability"
+    },
+    "recommendedActions": {
+      "title": "Recommended Actions",
+      "highRisk": "High risk: Schedule knowledge transfer for Microservices Architecture",
+      "mediumRisk": "Medium risk: Document Database Optimization processes",
+      "integrateKnowledge": "Integrate Frontend Architecture knowledge into onboarding",
+      "scheduleNow": "Schedule Now",
+      "assignTask": "Assign Task",
+      "viewDetails": "View Details"
+    }
+  },
+  "profile": {
+    "title": "My Profile",
+    "description": "Manage your knowledge areas and development path",
+    "name": "Name",
+    "email": "Email",
+    "role": "Role",
+    "department": "Department",
+    "position": "Position",
+    "joined": "Joined",
+    "notSpecified": "Not specified",
+    "editProfile": "Edit Profile",
+    "skillsAssessment": {
+      "title": "Skills Assessment",
+      "technicalKnowledge": "Technical Knowledge",
+      "documentation": "Documentation",
+      "knowledgeSharing": "Knowledge Sharing",
+      "mentoring": "Mentoring"
+    },
+    "knowledgeAreas": {
+      "title": "My Knowledge Areas",
+      "description": "Technical domains you're responsible for or contribute to",
+      "knowledgeArea": "Knowledge Area",
+      "expertiseLevel": "Expertise Level",
+      "lastUpdated": "Last Updated",
+      "actions": "Actions",
+      "update": "Update",
+      "document": "Document",
+      "addKnowledgeArea": "Add Knowledge Area"
+    },
+    "careerPathway": {
+      "title": "Career Pathway",
+      "description": "Your professional development milestones",
+      "completedOn": "Completed on",
+      "plannedFor": "Planned for",
+      "startWorking": "Start Working On This"
+    }
+  }
+} 
