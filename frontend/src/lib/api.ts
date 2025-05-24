@@ -55,10 +55,75 @@ export const authService = {
     }
   },
   
-  getProfile: async () => {
-    const response = await api.get('/users/profile');
+  getProfile: async (): Promise<UserProfile> => {
+    const response = await api.get<UserProfile>('/users/profile');
     return response.data;
   },
+};
+
+// Types mirroring backend DTOs for Profile page
+export interface UserPreferences {
+  notifications: boolean;
+  theme: string;
+  language: string;
+}
+
+export interface ProfileKnowledgeArea {
+  id: number;
+  name: string;
+  level: number;
+  lastUpdated?: string | null;
+}
+
+export interface ProfileCareerMilestone {
+  id: number;
+  title: string;
+  description?: string | null;
+  status: string;
+  date?: string | null;
+  plannedDate?: string | null;
+}
+
+export interface UserProfile {
+  id: number;
+  name:string;
+  email: string;
+  role: string;
+  isActive: boolean;
+  lastActivityAt?: string | null;
+  preferences: UserPreferences;
+  createdAt: string;
+  updatedAt: string;
+  knowledgeAreas: ProfileKnowledgeArea[];
+  careerMilestones: ProfileCareerMilestone[];
+}
+
+// Types mirroring backend DTOs for Admin Dashboard page
+export interface KnowledgeHeatMapItem {
+  id: number;
+  area: string;
+  level: number;
+  ownerName: string;
+  ownerEmail: string;
+  ownerId: number;
+  vulnerabilityScore?: number | null;
+}
+
+export interface DashboardStats {
+  keyKnowledgeAreas: number;
+  vulnerabilityAlerts: number;
+  technicalDocuments: number;
+}
+
+export interface AdminDashboardData {
+  heatMapData: KnowledgeHeatMapItem[];
+  stats: DashboardStats;
+}
+
+// API function for Admin Dashboard
+export const getAdminDashboardData = async (): Promise<AdminDashboardData> => {
+  const response = await api.get<AdminDashboardData>('/dashboard/admin-data');
+  return response.data;
 };
 
 export default api; 

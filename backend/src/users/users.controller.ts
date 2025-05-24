@@ -28,6 +28,7 @@ import { ChangePasswordDto } from "./dto/change-password.dto"
 import { UserRole } from "./dto/create-user.dto"
 import { Request as ExpressRequest } from "express"
 import { UpdatePreferencesDto } from "./dto/update-preferences.dto"
+import { ProfileResponseDto } from "./dto/ProfileResponse.dto" // Import the new DTO
 
 interface RequestWithUser extends ExpressRequest {
   user: {
@@ -79,7 +80,11 @@ export class UsersController {
 
   @Get("profile")
   @ApiOperation({ summary: "Get current user profile" })
-  @ApiResponse({ status: 200, description: "Return user profile" })
+  @ApiResponse({
+    status: 200,
+    description: "Return user profile with knowledge areas and career milestones",
+    type: ProfileResponseDto, // Reference the new DTO here
+  })
   getProfile(@Request() req: RequestWithUser) {
     return this.usersService.getProfile(req.user.id)
   }

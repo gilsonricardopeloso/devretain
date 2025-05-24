@@ -8,8 +8,14 @@ import {
 import { DrizzleService } from "../drizzle/drizzle.service"
 import { eq, like, and, desc, sql } from "drizzle-orm"
 import * as bcrypt from "bcrypt"
-import { users as usersTable } from "../db/schema"
-import type { User, NewUser } from "../db/schema"
+import {
+  users as usersTable,
+  knowledgeAreas as knowledgeAreasTable,
+  userKnowledgeAreas as userKnowledgeAreasTable,
+  careerMilestones as careerMilestonesTable,
+  User, // Keep User type
+  NewUser, // Keep NewUser type
+} from "../db/schema"
 import { ChangePasswordDto } from "./dto/change-password.dto"
 import { UserPreferencesDto } from "./dto/user-preferences.dto"
 import { CreateUserDto } from "./dto/create-user.dto"
@@ -18,6 +24,11 @@ import {
   UpdatePreferencesDto,
   UserPreferences,
 } from "./dto/update-preferences.dto"
+import {
+  ProfileResponseDto,
+  ProfileKnowledgeAreaDto,
+  ProfileCareerMilestoneDto,
+} from "./dto/ProfileResponse.dto"
 import { db } from "../db"
 
 interface PaginationOptions {
@@ -131,10 +142,68 @@ export class UsersService {
       .where(like(usersTable.name, `%${query}%`))
   }
 
-  async getProfile(userId: number): Promise<Omit<User, "password">> {
+  async getProfile(userId: number): Promise<ProfileResponseDto> {
+    // 1. Fetch user details (excluding password)
     const user = await this.findOne(userId)
-    const { password, ...profile } = user
-    return profile
+    if (!user) {
+      throw new NotFoundException(`User with ID ${userId} not found`)
+    }
+    const { password, ...userProfileData } = user
+
+    // 2. Fetch user's knowledge areas
+    const userKnowledgeAreasData = await db
+      .select({
+        id: knowledgeAreasTable.id, // Use knowledgeAreaId for the DTO id
+        name: knowledgeAreasTable.name,
+        level: userKnowledgeAreasTable.level,
+        lastUpdated: userKnowledgeAreasTable.lastUpdated,
+      })
+      .from(userKnowledgeAreasTable)
+      .innerJoin(
+        knowledgeAreasTable,
+        eq(userKnowledgeAreasTable.knowledgeAreaId, knowledgeAreasTable.id)
+      )
+      .where(eq(userKnowledgeAreasTable.userId, userId))
+
+    const profileKnowledgeAreas: ProfileKnowledgeAreaDto[] =
+      userKnowledgeAreasData.map((uka) => ({
+        id: uka.id,
+        name: uka.name,
+        level: uka.level,
+        lastUpdated: uka.lastUpdated,
+      }))
+
+    // 3. Fetch user's career milestones
+    const userCareerMilestonesData = await db
+      .select({
+        id: careerMilestonesTable.id,
+        title: careerMilestonesTable.title,
+        description: careerMilestonesTable.description,
+        status: careerMilestonesTable.status,
+        date: careerMilestonesTable.date,
+        plannedDate: careerMilestonesTable.plannedDate,
+      })
+      .from(careerMilestonesTable)
+      .where(eq(careerMilestonesTable.userId, userId))
+      .orderBy(desc(careerMilestonesTable.date || careerMilestonesTable.plannedDate || careerMilestonesTable.createdAt))
+
+
+    const profileCareerMilestones: ProfileCareerMilestoneDto[] =
+      userCareerMilestonesData.map((cm) => ({
+        id: cm.id,
+        title: cm.title,
+        description: cm.description,
+        status: cm.status,
+        date: cm.date,
+        plannedDate: cm.plannedDate,
+      }))
+
+    // 4. Combine into ProfileResponseDto
+    return {
+      ...userProfileData,
+      knowledgeAreas: profileKnowledgeAreas,
+      careerMilestones: profileCareerMilestones,
+    }
   }
 
   async updateStatus(id: number, isActive: boolean): Promise<User> {
